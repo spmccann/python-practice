@@ -1,5 +1,4 @@
-from tkinter import *
-from tkinter import ttk, filedialog, simpledialog
+from tkinter import ttk, filedialog, simpledialog, Tk, Button
 from PIL import Image, ImageDraw, ImageFont
 
 window = Tk()
