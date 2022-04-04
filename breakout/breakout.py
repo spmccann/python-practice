@@ -42,7 +42,7 @@ class Ball(Turtle):
         self.ball.showturtle()
 
     def move(self):
-        self.ball.fd(40)
+        self.ball.fd(30)
 
     def bounce(self):
         if self.ball.xcor() > 365:
@@ -51,10 +51,12 @@ class Ball(Turtle):
             self.ball.right(self.ball.xcor() * 1)
         elif self.ball.distance(paddle.paddle.pos()) < 50:
             self.ball.right((self.ball.ycor() * -1))
-        elif self.ball.ycor() < -265:
+        elif self.ball.ycor() < -275:
             Ball.restart(self)
-        elif self.ball.ycor() > 250:
+        elif self.ball.ycor() > 270:
             self.ball.right(self.ball.ycor() * -1)
+        elif self.ball.distance(brick.brick) < 50:
+            self.ball.right((self.ball.ycor() * -1))
 
 
 class Brick:
@@ -79,7 +81,7 @@ class Brick:
                 self.brick.pendown()
                 rnd_color = random.choice(self.brick_colors)
                 self.brick.color(rnd_color)
-                self.brick.stamp()
+                self.brick.clone()
                 self.x -= 75
             self.x = 300
             self.y -= 25
