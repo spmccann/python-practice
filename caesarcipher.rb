@@ -1,26 +1,21 @@
-def caesar_cipher(string, shift)
+# frozen_string_literal: true
+
+# Caesar Cipher
+def caesar_cipher(str, shift)
   alpha = ('a'..'z').to_a
   up_alpha = ('A'..'Z').to_a
   output = []
-  beforer_cipher = string.split('')
-  beforer_cipher.each do |letter|
+  str.split('').each do |letter|
     if alpha.include?(letter)
-      new_let_idx = alpha.index(letter) + shift
-      if (new_let_idx) < 26
-        output += [alpha[new_let_idx]]
-      else output += [alpha[new_let_idx % 26]] 
-      end
+      letter_index = alpha.index(letter) + shift
+      output += [alpha[letter_index]] if letter_index < 26 || output += [alpha[letter_index % 26]]
     elsif up_alpha.include?(letter)
-      new_let_idx = up_alpha.index(letter) + shift
-      if (new_let_idx) < 26
-        output += [up_alpha[new_let_idx]]
-      else output += [up_alpha[new_let_idx % 26]] 
-      end
-    else output += [letter]
+      letter_index = up_alpha.index(letter) + shift
+      output += [up_alpha[letter_index]] if letter_index < 26 || output += [up_alpha[letter_index % 26]]
+    else
+      output += [letter]
     end
   end
-  after_cipher = output.join("")
-  puts after_cipher
+  puts output.join('')
 end
-    
-caesar_cipher("What a string!", 5)
+caesar_cipher('What a string!', 5)
