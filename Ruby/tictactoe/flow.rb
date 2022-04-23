@@ -12,8 +12,8 @@ class GameFlowMessages
   def player_names
     puts 'Please enter the names for player one and player two (e.g Scott Mireya): '
     @names = gets.chomp.split
-    puts "Hello, #{@names[0]} and #{@names[1]}!"
-    puts "\nYou can make your move by entering the corresponding square number"
+    puts "\nHello, #{@names[0]} and #{@names[1]}!"
+    puts 'You can make your moves by entering the corresponding square number.'
   end
 
   def make_move(turn)
