@@ -2,16 +2,18 @@
 
 require './display'
 require './players'
-require 'colorize'
 
 # handles game flow/loop
 
 display = Display.new
-human = Players.new(display.start)
+player = Players.new
 game_loop = true
+player.start
 display.new_code
 
-
 while game_loop
-  display.guesses(human.guess)
+  abort if player.ending(display.result)
+  player.rounds(display.next_round)
+  display.guesses(player.guess)
+  display.feedback
 end
