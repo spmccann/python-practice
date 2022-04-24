@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# board upates
+# board updates
 class Board
   def initialize
     @squares = Array.new(9, ' ')
