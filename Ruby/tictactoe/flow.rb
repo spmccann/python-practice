@@ -10,7 +10,7 @@ class GameFlowMessages
   end
 
   def player_names
-    puts 'Please enter the names for player one and player two (e.g Scott Mireya): '
+    puts 'Please enter the names for player one and player two (John Jane): '
     @names = gets.chomp.split
     puts "\nHello, #{@names[0]} and #{@names[1]}!"
     puts 'You can make your moves by entering the corresponding square number.'
@@ -23,5 +23,13 @@ class GameFlowMessages
       puts "#{names[1]}, mark a square for 'O' (0-8):  "
     end
     gets.chomp.to_i
+  end
+
+  def winner(player)
+    if player == 'x'
+      puts "#{names[0]} is the winner!"
+    else
+      puts "#{names[1]} is the winner!"
+    end
   end
 end

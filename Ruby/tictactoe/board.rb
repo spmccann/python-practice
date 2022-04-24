@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
-require './flow'
-
 # board upates
-class Board < Flow
+class Board
   def initialize
-    super
     @squares = Array.new(9, ' ')
   end
 
@@ -46,23 +43,25 @@ class Board < Flow
   end
 
   def win_cases
-    x = %w[X X X]
-    o = %w[O O O]
-    top = @squares.values_at(0, 1, 2)
-    mid = @squares.values_at(3, 4, 5)
-    bot = @squares.values_at(6, 7, 8)
-    left = @squares.values_at(0, 3, 6)
-    center = @squares.values_at(1, 4, 7)
-    right = @squares.values_at(2, 5, 8)
-    l_diag = @squares.values_at(0, 4, 8)
-    r_diag = @squares.values_at(2, 4, 6)
-    wins = [top, mid, bot, left, center, right, l_diag, r_diag]
-    if wins.include?(x)
+    wins = [
+      @squares.values_at(0, 1, 2), @squares.values_at(3, 4, 5),
+      @squares.values_at(6, 7, 8), @squares.values_at(0, 3, 6),
+      @squares.values_at(1, 4, 7), @squares.values_at(2, 5, 8),
+      @squares.values_at(0, 4, 8), @squares.values_at(2, 4, 6)
+    ]
+    if wins.include?(%w[X X X])
       reset_board
-      puts "#{flow.names[0]} wins the game!"
-    elsif wins.include?(o)
+      @x = 'x'
+    elsif wins.include?(%w[O O O])
       reset_board
-      puts "#{flow.names[1]} wins the game!"
+    end
+  end
+
+  def won
+    if @x == 'x'
+      'x'
+    else
+      'o'
     end
   end
 

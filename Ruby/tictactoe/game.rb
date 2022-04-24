@@ -13,7 +13,7 @@ turn = true
 
 while game_status
   if board.win_cases
-    puts 'This person wins!'
+    flow.winner(board.won)
     flow.start_game ? board.display : abort
   elsif board.tie
     puts "It's a tie!"
