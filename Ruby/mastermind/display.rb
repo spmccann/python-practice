@@ -19,7 +19,7 @@ class Display
     if user_code == 'no code'
       4.times { @generated_code.push(@code_colors[rand(6)]) }
       @generated_code.each { |g| @vanity_code.push(@code_pegs[g]) }
-      puts @vanity_code.join(' ')
+      # puts @vanity_code.join(' ')
     else
       user_code.each { |g| @vanity_code.push(@code_pegs[g]) }
       puts "You have selected the code #{@vanity_code.join(' ')}"
@@ -39,7 +39,7 @@ class Display
   def pegs(guess)
     if guess == 12
       @player_code = make_a_code
-      puts @vanity_make_code.join(' ')
+      puts "Computer guesses #{@vanity_make_code.join(' ')}"
     else
       output = []
       guess.each { |g| output.push(@code_pegs[g]) }
@@ -66,7 +66,7 @@ class Display
     @player_code.each_index do |i|
       if @player_code[i] == @generated_code[i]
         puts 'Correct color, correct postion'
-      elsif @generated_code.include?(@player_code[i])
+      elsif @player_code.include?(@generated_code[i])
         puts 'Correct color, incorrect position'
       else
         count += 1

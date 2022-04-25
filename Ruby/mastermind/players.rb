@@ -20,17 +20,17 @@ class Players
   def ending(result)
     case result
     when 'won'
-      puts 'You won the game. Would you like you play again? (y/n)?'
+      puts 'The codebreaker won. Would you like you play again? (y/n)?'
       gets.chomp == 'n'
     when 'lost'
-      puts 'You lost. The codemaker won. Would you like you play again? (y/n)?'
+      puts 'The codemaker won. Would you like you play again? (y/n)?'
       gets.chomp == 'n'
     end
   end
 
   # code maker only
   def thinking
-    puts 'Computer is thinking...guesses: '
+    puts 'Computer is thinking... '
     12
   end
 end
