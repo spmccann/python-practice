@@ -14,32 +14,32 @@ class Display
   end
 
   def new_code(user_code = 'no code')
-    @vanity_code = []
+    @show_colorize_guess = []
     @generated_code = []
     if user_code == 'no code'
       4.times { @generated_code.push(@code_colors[rand(6)]) }
-      @generated_code.each { |g| @vanity_code.push(@code_pegs[g]) }
-      # puts @vanity_code.join(' ')
+      @generated_code.each { |g| @show_colorize_guess.push(@code_pegs[g]) }
+      # puts @show_colorize_guess.join(' ')
     else
-      user_code.each { |g| @vanity_code.push(@code_pegs[g]) }
-      puts "You have selected the code #{@vanity_code.join(' ')}"
-      @generated_code = user_code
+      user_code.each { |g| @show_colorize_guess.push(@code_pegs[g]) }
+      puts "You have selected the code #{@show_colorize_guess.join(' ')}"
+      @player_code = user_code
     end
   end
 
   # code maker only
   def make_a_code
-    @vanity_make_code = []
+    @show_maker_colorize = []
     @make_code = []
     4.times { @make_code.push(@code_colors[rand(6)]) }
-    @make_code.each { |g| @vanity_make_code.push(@code_pegs[g]) }
+    @make_code.each { |g| @show_maker_colorize.push(@code_pegs[g]) }
     @make_code
   end
 
   def pegs(guess)
     if guess == 12
-      @player_code = make_a_code
-      puts "Computer guesses #{@vanity_make_code.join(' ')}"
+      @generated_code = make_a_code
+      puts "Computer guesses #{@show_maker_colorize.join(' ')}"
     else
       output = []
       guess.each { |g| output.push(@code_pegs[g]) }
@@ -52,7 +52,7 @@ class Display
     if @player_code == @generated_code
       @round = 0
       @win = true
-      puts "You found the code! (#{@vanity_code.join(' ')})"
+      puts "You found the code! (#{@show_colorize_guess.join(' ')})"
     elsif @player_code.length != 4 || @player_code.all? { |g| @code_colors.include?(g).! }
       puts 'invalid guess. Please try again. '
       @round -= 1
@@ -63,7 +63,7 @@ class Display
 
   def check_matches
     count = 0
-    @player_code.each_index do |i|
+    @generated_code.each_index do |i|
       if @player_code[i] == @generated_code[i]
         puts 'Correct color, correct postion'
       elsif @player_code.include?(@generated_code[i])
@@ -96,7 +96,7 @@ class Display
   end
 
   def lost
-    puts "the code was #{@vanity_code.join(' ')}"
+    puts "the code was #{@show_colorize_guess.join(' ')}"
     @round = 0
     new_code
     'lost'

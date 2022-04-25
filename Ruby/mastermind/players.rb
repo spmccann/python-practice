@@ -9,7 +9,7 @@ class Players
   end
 
   def ask_code
-    puts 'Please choose 4 colors (options: red, blue, yellow, green, white or purple):'
+    puts "Enter four colors, each separated by a space\n(options: red, blue, yellow, green, white or purple):"
     gets.chomp.downcase.split.map(&:to_sym)
   end
 
@@ -20,10 +20,10 @@ class Players
   def ending(result)
     case result
     when 'won'
-      puts 'The codebreaker won. Would you like you play again? (y/n)?'
+      puts 'The codebreaker won. Would you like to try again? (y/n)?'
       gets.chomp == 'n'
     when 'lost'
-      puts 'The codemaker won. Would you like you play again? (y/n)?'
+      puts 'The codemaker won. Would you like try again? (y/n)?'
       gets.chomp == 'n'
     end
   end
@@ -31,6 +31,7 @@ class Players
   # code maker only
   def thinking
     puts 'Computer is thinking... '
+    sleep(1)
     12
   end
 end
