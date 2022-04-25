@@ -12,7 +12,7 @@ class Players
   end
 
   def rounds(round)
-    puts "\nMastermind Round #{round} (of 10)"
+    puts "\nMastermind Round #{round} (of 12)"
   end
 
   def ending(result)
