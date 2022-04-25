@@ -4,10 +4,12 @@
 class Players
   def start
     puts 'Welcome to Mastermind: A Game of Codemakers and Codebreakers'
+    puts 'Would you like to be the Codemaker or Codebreaker (m/b)?'
+    gets.chomp.downcase
   end
 
-  def guess
-    puts 'Please enter 4 colors (red, blue, yellow, green, white or purple):'
+  def ask_code
+    puts 'Please choose 4 colors (options: red, blue, yellow, green, white or purple):'
     gets.chomp.downcase.split.map(&:to_sym)
   end
 
@@ -24,5 +26,11 @@ class Players
       puts 'You lost. The codemaker won. Would you like you play again? (y/n)?'
       gets.chomp == 'n'
     end
+  end
+
+  # code maker only
+  def thinking
+    puts 'Computer is thinking...guesses: '
+    12
   end
 end

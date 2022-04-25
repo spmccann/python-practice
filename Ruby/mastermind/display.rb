@@ -13,26 +13,47 @@ class Display
     @round = 0
   end
 
-  def new_code
-    @round_code = []
-    @generated_code = @code_colors.sample(4)
-    @generated_code.each { |g| @round_code.push(@code_pegs[g]) }
-    puts @round_code.join(' ')
+  def new_code(user_code = 'no code')
+    @vanity_code = []
+    @generated_code = []
+    if user_code == 'no code'
+      4.times { @generated_code.push(@code_colors[rand(6)]) }
+      @generated_code.each { |g| @vanity_code.push(@code_pegs[g]) }
+      puts @vanity_code.join(' ')
+    else
+      user_code.each { |g| @vanity_code.push(@code_pegs[g]) }
+      puts "You have selected the code #{@vanity_code.join(' ')}"
+      @generated_code = user_code
+    end
   end
 
-  def guesses(guess)
-    output = []
-    guess.each { |g| output.push(@code_pegs[g]) } if guess.length == 4 && guess.all? { |g| @code_colors.include?(g) }
-    puts output.join(' ')
-    @player_code = guess
+  # code maker only
+  def make_a_code
+    @vanity_make_code = []
+    @make_code = []
+    4.times { @make_code.push(@code_colors[rand(6)]) }
+    @make_code.each { |g| @vanity_make_code.push(@code_pegs[g]) }
+    @make_code
+  end
+
+  def pegs(guess)
+    if guess == 12
+      @player_code = make_a_code
+      puts @vanity_make_code.join(' ')
+    else
+      output = []
+      guess.each { |g| output.push(@code_pegs[g]) }
+      puts output.join(' ')
+      @player_code = guess
+    end
   end
 
   def feedback
     if @player_code == @generated_code
       @round = 0
       @win = true
-      puts "You found the code! (#{@round_code.join(' ')})"
-    elsif @player_code.nil?
+      puts "You found the code! (#{@vanity_code.join(' ')})"
+    elsif @player_code.length != 4 || @player_code.all? { |g| @code_colors.include?(g).! }
       puts 'invalid guess. Please try again. '
       @round -= 1
     else
@@ -75,7 +96,7 @@ class Display
   end
 
   def lost
-    puts "the code was #{@round_code.join(' ')}"
+    puts "the code was #{@vanity_code.join(' ')}"
     @round = 0
     new_code
     'lost'
