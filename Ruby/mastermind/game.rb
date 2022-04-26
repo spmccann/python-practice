@@ -4,6 +4,7 @@ require 'colorize'
 
 # displays game updates
 class Game
+  # set up color visuals and color list
   def initialize
     @code_pegs = {
       'red': '■'.red, 'blue': '■'.blue, 'yellow': '■'.yellow,
@@ -13,6 +14,7 @@ class Game
     @round = 0
   end
 
+  # create a random new code for breaker and grabs the code for maker
   def new_code(user_code = 'no code')
     @show_colorize_guess = []
     @generated_code = []
@@ -27,7 +29,7 @@ class Game
     end
   end
 
-  # code maker only
+  # code maker only. random guesses
   def make_a_code
     @show_maker_colorize = []
     @make_code = []
@@ -36,6 +38,7 @@ class Game
     @make_code
   end
 
+  # assigns codes to test for maker. for both modes, outputs the visuals
   def pegs(guess)
     if guess == 12
       @generated_code = make_a_code
@@ -47,7 +50,7 @@ class Game
       @player_code = guess
     end
   end
-
+  # checks if player guesses the code. else if player inputs are valid. else send to check each color and position
   def feedback
     if @player_code == @generated_code
       @round = 0
@@ -61,6 +64,7 @@ class Game
     end
   end
 
+  # checks each case for matches or no matches, logic here still needs work
   def check_matches
     count = 0
     @generated_code.each_index do |i|
@@ -75,10 +79,12 @@ class Game
     end
   end
 
+  # increments the rounds
   def next_round
     @round += 1
   end
 
+  # sorts possible results
   def result
     if @round > 11
       lost
@@ -89,12 +95,14 @@ class Game
     end
   end
 
+  # resets the game for win
   def win
     @win = false
     new_code
     'won'
   end
 
+  # resets the game for loss
   def lost
     puts "the code was #{@show_colorize_guess.join(' ')}"
     @round = 0
